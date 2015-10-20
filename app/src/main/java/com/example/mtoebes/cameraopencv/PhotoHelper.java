@@ -70,7 +70,7 @@ public class PhotoHelper {
      * @return location mat was saved to
      */
     public static File saveMat(Mat mat) {
-        File newFile = generateFile(IMAGE_DIRECTORY, null, DEFAULT_TAG);
+        File newFile = generateFile(IMAGE_DIRECTORY, null, null);
         saveMatToFile(mat, newFile);
         return newFile;
     }
@@ -115,12 +115,13 @@ public class PhotoHelper {
         return null;
     }
     /**
-     * returns a unique filename based on the timestamp and with the given tag
+     * returns a unique filename based on the timestamp and with the default tag (DEFAULT_TAG)
      * @return unique filename with the given tag
      */
-    public static String generateFilename(String tag) {
-        //TODO call generateFilename(img,tag) with img set to the current time (see SimpleDateFormat.format(new Date()))
-        return null;
+    public static String generateFilename() {
+        String img = null; // TODO set img to the current time (see SimpleDateFormat.format(new Date()))
+        String tag = null; // TODO set tag to DEFAULT_TAG
+        return generateFilename(img,tag);
     }
 
     /**
@@ -130,8 +131,8 @@ public class PhotoHelper {
      * @return new filename with the IMG value of orgFilename and the TAG value of newTag
      */
     public static String replaceTag(String orgFilename, String newTag) {
-        // TODO call generateFilename(img, tag) with img set to orgFilename's IMG value
-        return null;
+        String img = null; //TODO set img to the the img value of orgFilename
+        return generateFilename(img,newTag);
     }
 
     /**
@@ -144,9 +145,8 @@ public class PhotoHelper {
      */
     public static File generateFile(File directory, String filename, String newTag) {
         String newFilename;
-
         // TODO if filename is not null, replace its tag to create newFilename
-        // TODO if filename is null, call generateFilename(tag) to create newFilename
+        // TODO if filename is null, call generateFilename() to create newFilename
         // TODO return a new file with path directory/newFilename;
         return null;
     }
