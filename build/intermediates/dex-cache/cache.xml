@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/Users/mtoebes/Development/CameraOpenCVSkeleton/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="/Users/mtoebes/Development/CameraOpenCVSkeleton/app/build/intermediates/pre-dexed/debug/classes-1959d25a2b4227a3b39aa5415dbcef096cfec0c8.jar" />
+    </item>
+    <item
+        jar="/Users/mtoebes/Development/CameraOpenCVSkeleton/app/build/intermediates/exploded-aar/CameraOpenCVSkeleton.libraries/opencv/unspecified/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="79e6e08f838b59c6afeb7103ad69cf2e627ef4b4">
+        <dex dex="/Users/mtoebes/Development/CameraOpenCVSkeleton/app/build/intermediates/pre-dexed/debug/classes-5218662251a9d3cb7b06d571ae18a42ca82a788c.jar" />
+    </item>
+    <item
+        jar="/Applications/adt-bundle-mac-x86_64-20140702/sdk/extras/android/m2repository/com/android/support/support-annotations/23.0.1/support-annotations-23.0.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="1fce89a6428c51467090d7f424e4c9c3dbd55f7e">
+        <dex dex="/Users/mtoebes/Development/CameraOpenCVSkeleton/app/build/intermediates/pre-dexed/debug/support-annotations-23.0.1-9e16f2178158191ee20b5159b9802e54a55516eb.jar" />
+    </item>
+    <item
+        jar="/Users/mtoebes/Development/CameraOpenCVSkeleton/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="/Users/mtoebes/Development/CameraOpenCVSkeleton/app/build/intermediates/pre-dexed/debug/classes-61782348db964c93d2ab8b8cd4d086da3e3d90de.jar" />
+    </item>
+    <item
+        jar="/Users/mtoebes/Development/CameraOpenCVSkeleton/app/build/intermediates/exploded-aar/com.android.support/design/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="e5c61a3169221a89654ffcaaed47bba51cf071ad">
+        <dex dex="/Users/mtoebes/Development/CameraOpenCVSkeleton/app/build/intermediates/pre-dexed/debug/classes-fd19ab01b6d80bf573982bd028d0f5ff5512ba41.jar" />
+    </item>
+    <item
+        jar="/Users/mtoebes/Development/CameraOpenCVSkeleton/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jumboMode="false"
+        revision="22.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="/Users/mtoebes/Development/CameraOpenCVSkeleton/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1-8579a2fe3f52835977a3c33346121f413ef89a82.jar" />
+    </item>
+
+</items>
