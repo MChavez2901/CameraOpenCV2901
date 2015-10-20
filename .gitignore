@@ -2,3 +2,6 @@
 .idea/
 *.a
 *.class
+*.lock
+
+*.properties
