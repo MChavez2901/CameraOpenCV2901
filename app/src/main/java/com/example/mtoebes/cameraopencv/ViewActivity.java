@@ -86,14 +86,9 @@ public class ViewActivity extends Activity implements OnItemSelectedListener {
      */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // get the text of the view
-        String tag = (String) ((TextView) view).getText();
-
-        // get the corresponding mat
-        Mat mat = getMat(tag);
-
-        // set the image to show mat
-        setImage(mat);
+        String tag = (String) ((TextView) view).getText(); // get the text of the view
+        Mat mat = getMat(tag); // get the corresponding mat
+        setImage(mat);  // set the image to show mat
     }
 
     /**
