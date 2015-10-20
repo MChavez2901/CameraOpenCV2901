@@ -152,7 +152,7 @@ public class MatFilter {
     }
 
     /**
-     *
+     * Draws lines on srcMat
      * @param srcMat a Mat of type CvType.CV_8U (single 8 bit channel)
      * @param lines a Mat of lines of the form [x1,y1,x2,y2]
      * @return Mat that is srcMat with the given lines drawn on
