@@ -40,7 +40,7 @@ public class GalleryActivity extends ListActivity  {
         mListAdapter = new GalleryListAdapter(data);
         this.setListAdapter(mListAdapter);
     }
-    
+
     /**
      * GalleryItem populates a single row in the Gallery List.
      * It contains a image, filename, and delete button.

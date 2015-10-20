@@ -37,7 +37,18 @@ public class MatFilter {
      */
     public static Mat getGrayScale(Mat srcMat) {
         Mat resMat = new Mat();
-        //TODO convert SrcMat to be grayscale (use Imgproc.cvtColor)
+        //TODO convert SrcMat to be grayscale (see Imgproc.cvtColor)
+        return resMat;
+    }
+
+    /**
+     * get the rbg mat result from the given mat
+     * @param srcMat a grayscale mat
+     * @return rbg of srcMat
+     */
+    public static Mat getRBG(Mat srcMat) {
+        Mat resMat = new Mat();
+        //TODO convert SrcMat to be rbg (see Imgproc.cvtColor)
         return resMat;
     }
 
@@ -50,7 +61,7 @@ public class MatFilter {
      */
     public static Mat getGaussianBlur(Mat srcMat, int ksize) {
         Mat resMat = new Mat();
-        //TODO call Imgproc's GaussianBlur method
+        //TODO perform filter, see Imgproc.GaussianBlur()
         return resMat;
     }
 
@@ -65,7 +76,7 @@ public class MatFilter {
      */
    public static Mat getCanny(Mat srcMat, int lowerThreshold, int upperTheshold) {
         Mat resMat = new Mat();
-       //TODO call Imgproc's Canny method
+       //TODO perform filter, see Imgproc.Canny()
         return resMat;
     }
 
@@ -81,7 +92,7 @@ public class MatFilter {
      */
     public static Mat getSobel(Mat srcMat, int dx, int dy, int ksize) {
         Mat resMat = new Mat();
-        //TODO call Imgproc's Sobel method
+        //TODO perform filter, see Imgproc.Sobel()
         return resMat;
     }
 
@@ -95,7 +106,7 @@ public class MatFilter {
      */
     public static Mat getLaplacian(Mat srcMat, int ksize) {
         Mat resMat = new Mat();
-        //TODO call Imgproc's Laplacian method
+        //TODO perform filter, see Imgproc.Laplacian()
         return resMat;
     }
 
@@ -111,8 +122,7 @@ public class MatFilter {
     }
 
     /**
-     * Performs a HoughLines transform
-     * see http://docs.opencv.org/modules/imgproc/doc/feature_detection.html?highlight=hough#cv2.HoughLinesP
+     * Performs a HoughLines transform and draws result on srcMat
      * see http://docs.opencv.org/doc/tutorials/imgproc/imgtrans/hough_lines/hough_lines.html?highlight=hough
      * @param srcMat a Mat of type CvType.CV_8U (single 8 bit channel) that is a result for a edge detection filter
      * @param threshold minumum points needed to form a line
@@ -121,19 +131,42 @@ public class MatFilter {
      * @return Mat with lines drawn on the input Mat srcMat
      */
     public static Mat getHoughMat(Mat srcMat, int threshold, int minLinLength, int maxLineGap) {
-        Mat resMat = new Mat();
-        Mat lines = new Mat();
-        //TODO set resMat to be 3-channels (contvert from grayscale to rbg)
-
-        //TODO call Imgproc's HoughLinesP method (store result in lines)
-
-        //TODO for each index, draw a line on resMat (see Imgproc.line)
+        Mat lines = getHoughLines(srcMat, threshold, minLinLength, maxLineGap);
+        Mat resMat = drawHoughLines(srcMat, lines);
         return resMat;
     }
 
+    /**
+     * Performs HoughLinesP to find all lines in srcMat
+     * see http://docs.opencv.org/modules/imgproc/doc/feature_detection.html?highlight=hough#cv2.HoughLinesP
+     * @param srcMat a Mat of type CvType.CV_8U (single 8 bit channel) that is a result for a edge detection filter
+     * @param threshold minumum points needed to form a line
+     * @param minLinLength minimum length of a line
+     * @param maxLineGap lines in srcMat
+     * @return Mat of lines of form [x1,y1,x2,y2]
+     */
+    private static Mat getHoughLines(Mat srcMat, int threshold, int minLinLength, int maxLineGap) {
+        Mat lines = new Mat();
+        // TODO perform HoughLinesP, see Imgproc.HoughLinesP()
+        return lines;
+    }
 
-    // methods using preset paramters
+    /**
+     *
+     * @param srcMat a Mat of type CvType.CV_8U (single 8 bit channel)
+     * @param lines a Mat of lines of the form [x1,y1,x2,y2]
+     * @return Mat that is srcMat with the given lines drawn on
+     */
+    private static Mat drawHoughLines(Mat srcMat, Mat lines) {
+        Mat resMat = null; // TODO set resMAt to be rbg of srcMat
+        for(int index = 0; index < lines.rows(); index++) {
+            double[] line = lines.get(index, 0);
+            // TODO draw line on resMat (see Imgproc.line)
+        }
+        return resMat;
+    }
 
+    // methods using pre-set paramters
     public static Mat getGaussianBlur(Mat srcMat) {
         return getGaussianBlur(srcMat, gaussian_ksize);
     }
