@@ -37,7 +37,7 @@ public class MatFilter {
      */
     public static Mat getGrayScale(Mat srcMat) {
         Mat resMat = new Mat();
-        Imgproc.cvtColor(srcMat, resMat, Imgproc.COLOR_BGRA2GRAY);
+        //TODO convert SrcMat to be grayscale (use Imgproc.cvtColor)
         return resMat;
     }
 
@@ -50,7 +50,7 @@ public class MatFilter {
      */
     public static Mat getGaussianBlur(Mat srcMat, int ksize) {
         Mat resMat = new Mat();
-        Imgproc.GaussianBlur(srcMat, resMat, new Size(ksize, ksize), 0, 0);
+        //TODO call Imgproc's GaussianBlur method
         return resMat;
     }
 
@@ -65,7 +65,7 @@ public class MatFilter {
      */
    public static Mat getCanny(Mat srcMat, int lowerThreshold, int upperTheshold) {
         Mat resMat = new Mat();
-        Imgproc.Canny(srcMat, resMat, lowerThreshold, upperTheshold);
+       //TODO call Imgproc's Canny method
         return resMat;
     }
 
@@ -81,7 +81,7 @@ public class MatFilter {
      */
     public static Mat getSobel(Mat srcMat, int dx, int dy, int ksize) {
         Mat resMat = new Mat();
-        Imgproc.Sobel(srcMat, resMat, DEPTH, dx, dy, ksize, 1, 0);
+        //TODO call Imgproc's Sobel method
         return resMat;
     }
 
@@ -95,7 +95,7 @@ public class MatFilter {
      */
     public static Mat getLaplacian(Mat srcMat, int ksize) {
         Mat resMat = new Mat();
-        Imgproc.Laplacian(srcMat, resMat, DEPTH, ksize, 1, 0);
+        //TODO call Imgproc's Laplacian method
         return resMat;
     }
 
@@ -106,9 +106,8 @@ public class MatFilter {
      * @return mat of a single color channel taken from srcMat
      */
     public static Mat getChannel(Mat srcMat, int channel) {
-        List<Mat> channels = new ArrayList<>(3);
-        Core.split(srcMat, channels);
-        return channels.get(channel);
+        //TODO split srcMat into its 3 channels, return desired one (see Core.split)
+        return null;
     }
 
     /**
@@ -123,21 +122,17 @@ public class MatFilter {
      */
     public static Mat getHoughMat(Mat srcMat, int threshold, int minLinLength, int maxLineGap) {
         Mat resMat = new Mat();
-        Imgproc.cvtColor(srcMat, resMat, Imgproc.COLOR_GRAY2BGR);
-
         Mat lines = new Mat();
-        Imgproc.HoughLinesP(srcMat, lines, D_RHO, D_THETA, hough_threshold, hough_minLinLength, hough_maxLineGap);
+        //TODO set resMat to be 3-channels (contvert from grayscale to rbg)
 
-        for(int index = 0; index < lines.rows(); index++) {
-            double[] vec = lines.get(index, 0);
-            double x1 = vec[0], y1 = vec[1], x2 = vec[2], y2 = vec[3];
-            Point start = new Point(x1, y1);
-            Point end = new Point(x2, y2);
-            Imgproc.line(resMat, start, end, new Scalar(0, 0, 255), 5, Imgproc.LINE_AA, 0);
-        }
+        //TODO call Imgproc's HoughLinesP method (store result in lines)
+
+        //TODO for each index, draw a line on resMat (see Imgproc.line)
         return resMat;
     }
 
+
+    // methods using preset paramters
 
     public static Mat getGaussianBlur(Mat srcMat) {
         return getGaussianBlur(srcMat, gaussian_ksize);

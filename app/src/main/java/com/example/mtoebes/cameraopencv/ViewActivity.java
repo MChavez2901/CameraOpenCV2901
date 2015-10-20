@@ -44,6 +44,7 @@ public class ViewActivity extends Activity implements OnItemSelectedListener {
     private File mFile; // File to get mSrcMat from
     private Bitmap mBitmap; // Bitmap use hold Mat's in View friendly form
     private ImageView mImage; // View to display mBitmap
+    private Spinner mSpinner; // View to house menu options
     private Map<String,Mat> mMats = new HashMap<>(); // mapping of tags to Mats
 
     @Override
@@ -52,20 +53,18 @@ public class ViewActivity extends Activity implements OnItemSelectedListener {
         setContentView(R.layout.activity_view);
 
         // grab the extra denoting the filepath and use it to create a File
-        Bundle extras = getIntent().getExtras();
-        String filePath = extras.getString(EXTRA_FILE_PATH);
-        mFile = new File(filePath);
+        //TODO grab filePath from inent Extra, create mFile with it
 
-        mImage = (ImageView)this.findViewById(R.id.image);
+        //TODO set mImage to the ImageView in the layout
 
         // set up the spinner to listen for when an item is selected
         // spinner's items are set from @array/transforms
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        spinner.setOnItemSelectedListener(this);
+        //TODO set mSpinner to the Spinner in the layout
+        //TODO set mSpinner's setOnItemSelectedListener to this class
 
         // get the Mat at mFile, create a bitmap from it, and set it as the display image
-        mSrcMat = PhotoHelper.getMat(mFile);
-        mBitmap = Bitmap.createBitmap(mSrcMat.cols(), mSrcMat.rows(), Bitmap.Config.ARGB_8888);
+        //TODO open mFile and set mSrcMat to the Mat stored there
+        //TODO create mBitmap as a Bitmap large enough to hold mSrcMat (use Bitmap.Config.ARGB_8888)
         setImage(mSrcMat);
     }
 
@@ -74,8 +73,8 @@ public class ViewActivity extends Activity implements OnItemSelectedListener {
      * @param mat mat to display
      */
     protected void setImage(Mat mat) {
-        Utils.matToBitmap(mat, mBitmap);
-        mImage.setImageBitmap(mBitmap);
+        //TODO convert mat into a bitmap (see Utils.matToBitmap)
+        //TODO set mImage to show the bitmap
     }
 
     /**
@@ -98,7 +97,7 @@ public class ViewActivity extends Activity implements OnItemSelectedListener {
     }
 
     /**
-     *  invoked when the selection disappears from the spinner (will not happen)
+     * Invoked when the selection disappears from the spinner (will not happen)
      * @param parent the spinner view
      */
     @Override
@@ -111,8 +110,7 @@ public class ViewActivity extends Activity implements OnItemSelectedListener {
      */
     public Mat getMat(String tag) {
         // If we already created the mat, return it
-        if(mMats.containsKey(tag))
-            return mMats.get(tag);
+        //TODO check to see if mMat's contains tag as a key, if so, return the value for that key
 
         // Else create it
         Mat resMat;
@@ -144,7 +142,7 @@ public class ViewActivity extends Activity implements OnItemSelectedListener {
         }
 
         // add the mat to the map so we remember it next time
-        mMats.put(tag, resMat);
+        //TODO add key/value pair tag/resMat to mMats
         return resMat;
     }
 }

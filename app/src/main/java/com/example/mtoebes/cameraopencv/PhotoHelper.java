@@ -47,7 +47,7 @@ public class PhotoHelper {
      * @param file location to save to
      */
     public static void saveMatToFile(Mat mat, File file) {
-        Imgcodecs.imwrite(file.getPath(), mat);
+        //TODO write mat to file (see Imgcodecs.imwrite)
     }
 
     /**
@@ -81,7 +81,8 @@ public class PhotoHelper {
      * @return mat saved in file
      */
     public static Mat getMat(File file) {
-        return Imgcodecs.imread(file.getPath());
+        //TODO read mat from file (see Imgcodecs.imread)
+        return null;
     }
 
     /**
@@ -90,10 +91,9 @@ public class PhotoHelper {
      * @return Bitmap of mat saved in file
      */
     public static Bitmap readIntoBitmap(File file) {
-        Mat mat = getMat(file);
-        Bitmap bitmap = Bitmap.createBitmap(mat.cols(), mat.rows(), Bitmap.Config.ARGB_8888);
-        Utils.matToBitmap(mat, bitmap);
-        return bitmap;
+        //TODO read mat from file
+        //TODO create a bitmap and convert mat to it (see Utils.matToBitmap)
+        return null;
     }
 
     /**
@@ -101,7 +101,7 @@ public class PhotoHelper {
      * @param file File to remove
      */
     public static void removeFile(File file) {
-        file.delete();
+        //TODO delete file
     }
 
     /**
@@ -111,14 +111,16 @@ public class PhotoHelper {
      * @return filename of the formate IMG_img_TAG_tag.jpg
      */
     public static String generateFilename(String img, String tag) {
-        return IMG + img + TAG + tag + EXT;
+        //TODO returns a string representing the filename with IMG value img and TAG value tag
+        return null;
     }
     /**
      * returns a unique filename based on the timestamp and with the given tag
      * @return unique filename with the given tag
      */
     public static String generateFilename(String tag) {
-        return generateFilename(DATE_FORMAT.format(new Date()),tag);
+        //TODO call generateFilename(img,tag) with img set to the current time (see SimpleDateFormat.format(new Date()))
+        return null;
     }
 
     /**
@@ -128,7 +130,8 @@ public class PhotoHelper {
      * @return new filename with the IMG value of orgFilename and the TAG value of newTag
      */
     public static String replaceTag(String orgFilename, String newTag) {
-        return generateFilename(getIMG(orgFilename), newTag);
+        // TODO call generateFilename(img, tag) with img set to orgFilename's IMG value
+        return null;
     }
 
     /**
@@ -142,12 +145,10 @@ public class PhotoHelper {
     public static File generateFile(File directory, String filename, String newTag) {
         String newFilename;
 
-        if(filename == null)
-            newFilename = generateFilename(newTag);
-         else
-            newFilename = replaceTag(filename, newTag);
-
-        return new File(directory, newFilename);
+        // TODO if filename is not null, replace its tag to create newFilename
+        // TODO if filename is null, call generateFilename(tag) to create newFilename
+        // TODO return a new file with path directory/newFilename;
+        return null;
     }
 
     /**
@@ -156,7 +157,8 @@ public class PhotoHelper {
      * @return tag of filename
      */
     public static String getTAG(String filename) {
-        return filename.substring(filename.lastIndexOf(TAG) + TAG.length(), filename.lastIndexOf(EXT));
+        // TODO get the tag value from the filename (see String.substring)
+        return null;
     }
 
     /**
@@ -165,7 +167,8 @@ public class PhotoHelper {
      * @return img of the filename
      */
     public static String getIMG(String filename) {
-        return filename.substring(filename.lastIndexOf(IMG) + IMG.length(), filename.lastIndexOf(TAG));
+        // TODO get the img value from the filename (see String.substring)
+        return null;
     }
 
     /**
@@ -201,12 +204,8 @@ public class PhotoHelper {
      * @return path to created directory
      */
     public static File createDirectory(File parent, String directoryName) {
-        File outputDirectory = new File(parent, directoryName);
-        if (!outputDirectory.exists())
-            if (!outputDirectory.mkdirs()) {
-                Log.e(TAG, "Failed to create dir " + outputDirectory.getPath());
-                return null;
-            }
-        return outputDirectory;
+        // TODO make a file with path parent/directoryName
+        // TODO if file does not exist, make it (see File.exists() and File.mkdirs())
+        return null;
     }
 }

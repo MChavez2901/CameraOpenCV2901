@@ -1,7 +1,6 @@
 package com.example.mtoebes.cameraopencv;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -25,8 +24,7 @@ public class MainActivity extends Activity {
      * @param view
      */
     public void openCamera(View view) {
-        Intent intent = new Intent(this, CameraActivity.class);
-        startActivity(intent);
+        //TODO: start the CameraActivity
     }
 
     /**
@@ -35,8 +33,7 @@ public class MainActivity extends Activity {
      * @param view
      */
     public void openGallery(View view) {
-        Intent intent = new Intent(this, GalleryActivity.class);
-        startActivity(intent);
+        // TODO start the GalleryActivity
     }
 }
 

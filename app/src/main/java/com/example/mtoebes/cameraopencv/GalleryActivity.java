@@ -127,9 +127,7 @@ public class GalleryActivity extends ListActivity  {
                 mListAdapter.remove(mFile);
                 PhotoHelper.removeFile(mFile);
             } else { // start ViewActivity
-                Intent intent = new Intent(mContext, ViewActivity.class);
-                intent.putExtra(ViewActivity.EXTRA_FILE_PATH, mFile.getPath());
-                startActivity(intent);
+                //TODO start ViewAcitivity with EXTRA_FILE_PATH set to the path of mFile
             }
         }
     }
