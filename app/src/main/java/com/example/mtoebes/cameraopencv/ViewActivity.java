@@ -141,7 +141,7 @@ public class ViewActivity extends Activity implements OnItemSelectedListener {
                 resMat = mSrcMat; break;
         }
 
-        // add the mat to the map so we remember it next time
+        // add the created mat to the map so we remember it next time
         //TODO add key/value pair tag/resMat to mMats
         return resMat;
     }
