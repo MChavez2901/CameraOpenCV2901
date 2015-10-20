@@ -34,11 +34,55 @@ public class GalleryActivity extends ListActivity  {
         setContentView(R.layout.activity_gallery);
 
         // get list of the files we want to display in gallery
-        List<File> data = PhotoHelper.getBitmapFiles(PhotoHelper.DEFAULT_TAG);
+        List<File> data = null; // TODO get files with tag=DEFAULT_TAG to show in Gallery (see PhotoHelper.getBitmapFiles)
 
         // create the ArrayAdapter that will populate this view
         mListAdapter = new GalleryListAdapter(data);
         this.setListAdapter(mListAdapter);
+    }
+    
+    /**
+     * GalleryItem populates a single row in the Gallery List.
+     * It contains a image, filename, and delete button.
+     */
+    private class GalleryItem implements View.OnClickListener {
+        ImageView mThumbnail; // View to store a small image of mat at mFile
+        TextView mFileName; // View to store mFile's name
+        Button mDeleteButton; // Button to delete this item
+        File mFile; // File to get info from to set mThumbnail/mFileName
+
+        /**
+         * create a new GalleryItem
+         * @param row View to create the GalleryItem at
+         */
+        public GalleryItem(View row) {
+            row.setTag(this);
+            //TODO set mThumbnail, mFileName, mDeleteButton using id's from the layout
+            //TODO set setOnClickListener for mThumbnail and mDeleteButton to this class
+        }
+
+        /**
+         * set the File for this GalleryItem to display info of
+         * @param file file to display info of
+         */
+        public void setFile(File file) {
+            //TODO set mFile, mFileName, and mThumbnail using the given file
+        }
+
+        /**
+         * Called when a view has been clicked.
+         * clicking mDeleteButton will remove this GalleryItem from the List and delete the file
+         * clicking mThumbnail will start the ViewActivity for the file.
+         * @param v view that has been clicked
+         */
+        @Override
+        public void onClick(View v) {
+            if(v.getId() == (mDeleteButton.getId())) { // delete mFile
+                //TODO remove mFile from mListAdapter and delete the File (see PhotoHelper.remove())
+            } else if(v.getId() == (mThumbnail.getId())) { // start ViewActivity
+                //TODO start ViewAcitivity with EXTRA_FILE_PATH set to the path of mFile
+            }
+        }
     }
 
     /**
@@ -79,50 +123,6 @@ public class GalleryActivity extends ListActivity  {
             File file = this.getItem(position);
             rowItem.setFile(file);
             return row;
-        }
-    }
-
-    /**
-     * GalleryItem populates a single row in the Gallery List.
-     * It contains a image, filename, and delete button.
-     */
-    private class GalleryItem implements View.OnClickListener {
-        ImageView mThumbnail; // View to store a small image of mat at mFile
-        TextView mFileName; // View to store mFile's name
-        Button mDeleteButton; // Button to delete this item
-        File mFile; // File to get info from to set mThumbnail/mFileName
-
-        /**
-         * create a new GalleryItem
-         * @param row View to create the GalleryItem at
-         */
-        public GalleryItem(View row) {
-            row.setTag(this);
-            //TODO set mThumbnail, mFileName, mDeleteButton using id's from the layout
-            //TODO set setOnClickListener for mThumbnail and mDeleteButton to this class
-        }
-
-        /**
-         * set the File for this GalleryItem to display info of
-         * @param file file to display info of
-         */
-        public void setFile(File file) {
-            //TODO set mFile, mFileName, and mThumbnail using the given file
-        }
-
-        /**
-         * Called when a view has been clicked.
-         * clicking mDeleteButton will remove this GalleryItem from the List and delete the file
-         * clicking mThumbnail will start the ViewActivity for the file.
-         * @param v view that has been clicked
-         */
-        @Override
-        public void onClick(View v) {
-            if(v.getId() == (mDeleteButton.getId())) { // delete mFile
-                //TODO remove mFile from mListAdapter and delete the File (see PhotoHelper.remove())
-            } else { // start ViewActivity
-                //TODO start ViewAcitivity with EXTRA_FILE_PATH set to the path of mFile
-            }
         }
     }
 }

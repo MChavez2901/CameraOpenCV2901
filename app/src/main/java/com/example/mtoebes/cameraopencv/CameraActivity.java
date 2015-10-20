@@ -61,7 +61,7 @@ public class CameraActivity extends Activity implements CvCameraViewListener2 {
     // This method is invoked when delivery of the frame needs to be done.
     @Override
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
-        //TODO set mRgba to the current frame's rgba Mat
+        //TODO set mRgba to the inputFrame's rgba Mat
         //TODO return the frame's rgba Mat
         return null;
     }

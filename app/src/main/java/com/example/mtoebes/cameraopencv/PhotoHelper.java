@@ -130,9 +130,9 @@ public class PhotoHelper {
         String newFilename;
 
         if(filename == null) {
-            // TODO if filename is null, call generateFilename() to create newFilename
+            // TODO if filename is null, use generateFilename() to create newFilename
         } else {
-            // TODO if filename is not null, replace its tag to create newFilename
+            // TODO if filename is not null, use replaceTag to create newFilename
         }
 
         // TODO return a new file with path directory/newFilename;
