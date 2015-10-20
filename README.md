@@ -19,3 +19,5 @@ The work can be split up into several independant pieces:
 4) MatFilter - perform image processing on images
 
 5) MainActivity - allow user to start Camera/Gallery Activities 
+
+read over the comments in each java class to get an understanding for their purpose
