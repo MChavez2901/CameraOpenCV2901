@@ -4,4 +4,4 @@
 *.class
 *.lock
 *.properties
-.gradle/OA
+.gradle/
