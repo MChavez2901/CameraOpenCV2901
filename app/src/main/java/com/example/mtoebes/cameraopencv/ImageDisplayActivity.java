@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ImageDisplayActivity uses EXTRA_FILE_PATH to open the Mat sotred at that location
+ * ImageDisplayActivity uses EXTRA_FILE_PATH to open the Mat stored at that location
  * In order to allow the use to perform a variety of image processsing on it
  * info on spinners: http://developer.android.com/guide/topics/ui/controls/spinner.html
  * info on hashmaps: http://beginnersbook.com/2013/12/hashmap-in-java-with-example/
@@ -38,7 +38,7 @@ public class ImageDisplayActivity extends Activity implements OnItemSelectedList
     private Mat mSrcMat; // Unaltered Mat to use as base
     private Bitmap mBitmap; // Bitmap use hold Mat's in View friendly form
     private ImageView mImage; // View to display mBitmap
-    private Spinner mSpinner; // View of menu options 
+    private Spinner mSpinner; // View of menu options
     private Map<String,Mat> mMats = new HashMap<>(); // mapping of tags to Mats
 
     @Override
