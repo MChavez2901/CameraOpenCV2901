@@ -1,13 +1,12 @@
 # CameraOpenCVSkeleton
 
-The purpose of this Application is to allow the user to access the camera in order to take and save images to file.
-Once saved, we can perform several image processing techniques to parse information about the image such as identifying colors and lines
+The purpose of this Application is to allow us to access the camera in order to take and save images to file.
+Once saved, we can perform several image processing techniques to parse information about the image such as identifying colors and lines.
 
-This app makes use of OpenCV to perform matrix operations that are normally very complicated in Java. 
-Throughout the app, there are links to api pages to learn more about the methods. 
-You can allow view the full javadoc at http://docs.opencv.org/java/
+This app makes use of OpenCV to perform matrix operations that are normally very complicated to write in native java. 
 
-There are several TODO's throughout this app that need to be completed for this app to function. 
+There are several TODO's in the project that need to be completed for this app to function. The more complicated ones are accompanied by links to api pages that explain the functionality you need to implement. Look at each activities import statments to get an idea of the classes you will be using to complete the code logic.
+
 The work can be split up into several independant pieces:
 
 1) PhotoHelper - allows reading/saving of images
@@ -22,4 +21,8 @@ The work can be split up into several independant pieces:
 
 6) MainActivity - allow user to start Camera/Gallery Activities 
 
-read over the comments in eachclass to get an understanding for their purpose
+javadocs
+
+openCV : http://docs.opencv.org/java/ 
+
+android : http://developer.android.com/reference/packages.html. 
