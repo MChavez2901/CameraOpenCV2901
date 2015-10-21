@@ -12,7 +12,7 @@ import org.opencv.core.Mat;
 /*
  * CameraActivity opens the back camera and displays the view to the screen.
  * By calling takePhoto(), the current view is saved to a jpg file in mat format.
- * see http://www.jayrambhia.com/blog/beginning-android-opencv/ for help
+ * see http://docs.opencv.org/java/org/opencv/android/CameraBridgeViewBase.html
  */
 public class CameraActivity extends Activity implements CvCameraViewListener2 {
     private static final String TAG = "CameraActivity";
@@ -43,11 +43,6 @@ public class CameraActivity extends Activity implements CvCameraViewListener2 {
         //TODO enable the camera view
     }
 
-    // onClick event that is called when the button with id "take_photo_button" is pressed
-    public void takePhoto(View view) {
-        //TODO use PhotoHelper to save the mat to a file
-    }
-
     // This method is invoked when camera preview has started.
     @Override
     public void onCameraViewStarted(int width, int height) {
@@ -62,7 +57,11 @@ public class CameraActivity extends Activity implements CvCameraViewListener2 {
     @Override
     public Mat onCameraFrame(CvCameraViewFrame inputFrame) {
         //TODO set mRgba to the inputFrame's rgba Mat
-        //TODO return the frame's rgba Mat
-        return null;
+        return mRgba;
+    }
+
+    // onClick event that is called when the button with id "take_photo_button" is pressed
+    public void takePhoto(View view) {
+        //TODO save mRgba to a file
     }
 }

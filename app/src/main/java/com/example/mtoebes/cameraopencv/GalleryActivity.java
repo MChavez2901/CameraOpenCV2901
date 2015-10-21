@@ -17,7 +17,7 @@ import java.util.List;
 
 /*
  * GalleryActivity displays a list of all the available unaltered images.
- * Upon clicking a image, ViewActivity is started to display it.
+ * Upon clicking a image, ImageDisplayActivity is started to display it.
  */
 public class GalleryActivity extends ListActivity  {
     private static final String TAG = "GalleryActivity";
@@ -34,7 +34,7 @@ public class GalleryActivity extends ListActivity  {
         setContentView(R.layout.activity_gallery);
 
         // get list of the files we want to display in gallery
-        List<File> data = null; // TODO get files with tag=DEFAULT_TAG to show in Gallery (see PhotoHelper.getBitmapFiles)
+        List<File> data = null; // TODO get files with tag=DEFAULT_TAG to show in Gallery
 
         // create the ArrayAdapter that will populate this view
         mListAdapter = new GalleryListAdapter(data);
@@ -53,7 +53,7 @@ public class GalleryActivity extends ListActivity  {
 
         /**
          * create a new GalleryItem
-         * @param row View to create the GalleryItem at
+         * @param row View to create the GalleryItem at, row is inflated using layout gallery_list_item.xml
          */
         public GalleryItem(View row) {
             row.setTag(this);
@@ -67,6 +67,7 @@ public class GalleryActivity extends ListActivity  {
          */
         public void setFile(File file) {
             //TODO set mFile, mFileName, and mThumbnail using the given file
+            //TODO for mThumbnail see ImageView.setImageBitmap()
         }
 
         /**
@@ -78,9 +79,10 @@ public class GalleryActivity extends ListActivity  {
         @Override
         public void onClick(View v) {
             if(v.getId() == (mDeleteButton.getId())) { // delete mFile
-                //TODO remove mFile from mListAdapter and delete the File (see PhotoHelper.remove())
+                //TODO remove mFile from mListAdapter and delete the File
             } else if(v.getId() == (mThumbnail.getId())) { // start ViewActivity
-                //TODO start ViewAcitivity with EXTRA_FILE_PATH set to the path of mFile
+                //TODO start ImageDisplayActivity with an extra called ImageDisplayActivity.EXTRA_FILE_PATH set to the path of mFile
+                // see https://androidcookbook.com/Recipe.seam?recipeId=809
             }
         }
     }

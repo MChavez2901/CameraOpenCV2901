@@ -17,10 +17,21 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * PhotoHelper assists in saving and reading bitmaps from file
+ * FileHelper assists in saving and reading bitmaps from file.
+ * Files are saved under android's public storage directory in a subdirectory called CameraOpenCV
+ * Filenames are of the format IMG_img_TAG_tag.jpg,
+ * IMG: the img value is set to the timestamp the original image was taken and the
+ * TAG: using tags, we can save multiple copies of the same original image with different tags
+ *      such that the tag value tells us what image manipulation has been applied to that copy
+ * see http://docs.opencv.org/java/org/opencv/highgui/Highgui.html for writing/reading files
  */
-public class PhotoHelper {
-    private static final String LOG_TAG = "PhotoHelper";
+
+/* TODO this class is split into sections: SAVING FILES, READING FILES, REMOVING FILES, CREATING FILES, and SEARCHING FILES
+ * TODO you should implement the methods in CREATING FILES prior to working on the other sections
+ */
+
+public class FileHelper {
+    private static final String LOG_TAG = "FileHelper";
 
     public static final String DEFAULT_TAG = "default";
 
@@ -39,7 +50,10 @@ public class PhotoHelper {
     // Directory of storage for our images
     private static final File IMAGE_DIRECTORY = createDirectory(PUBLIC_STORAGE, IMAGE_DIRECTORY_NAME);
 
+    // Format for reading timestamp
     private static SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyyMMdd_HHmmss");
+
+    // **** SAVING FILES **** //
 
     /**
      * Saves a mat to a file
@@ -57,7 +71,7 @@ public class PhotoHelper {
      * @return location mat was saved to
      */
     public static File saveMat(Mat mat) {
-        File newFile = null; // TODO generate new File with parent directory IMAGE_DIRECTORY
+        File newFile = null; // TODO create new File with parent directory IMAGE_DIRECTORY
         // TODO save mat to newFile
         return newFile;
     }
@@ -70,7 +84,7 @@ public class PhotoHelper {
      * @return location mat was saved to
      */
     public static File saveMat(Mat mat, File file, String newTag) {
-         /* TODO generate new File
+         /* TODO create new File
           * parent directory should be same as file's
           * filename should be same as file's with the tag replaced
           */
@@ -78,6 +92,8 @@ public class PhotoHelper {
         // TODO save mat to newFile
         return newFile;
     }
+
+    // **** READING FILES **** //
 
     /**
      * Reads mat from a file
@@ -90,7 +106,7 @@ public class PhotoHelper {
     }
 
     /**
-     * Reads mat from a file and returns it as a Bitmap
+     * Reads mat from a file and returns it as a Bitmap (use Bitmap.Config.ARGB_8888)
      * @param file file to read from
      * @return Bitmap of mat saved in file
      */
@@ -100,74 +116,37 @@ public class PhotoHelper {
         return null;
     }
 
+    // **** REMOVING FILES **** //
+
     /**
      * Remove the given File
      * @param file File to remove
      */
     public static void removeFile(File file) {
-        //TODO delete file (see File.remove())
+        //TODO delete file (see File.delete())
     }
 
-    /**
-     * Retrieves a List of all the bitmap Files that have the given tag
-     * @param tag desired tag to filter by
-     * @return List of Files with given tag
-     */
-    public static List<File> getBitmapFiles(String tag) {
-        BitmapTagFilter filter = new BitmapTagFilter(tag);
-        return new ArrayList<>(Arrays.asList(IMAGE_DIRECTORY.listFiles(filter)));
-    }
-
-    /**
-     * Returns a File who's parent is directory and name is filename with TAG value newTag
-     * if filename is null, a new filename is created
-     * @param directory parent to create the file under
-     * @param filename filename to use the IMG value from
-     * @param newTag TAG value to use, if null, uses DEFAULT_TAG
-     * @return File with save path as directory/filename but with the TAG newTag
-     */
-    private static File generateFile(File directory, String filename, String newTag) {
-        String newFilename;
-
-        if(filename == null) {
-            // TODO if filename is null, use generateFilename() to create newFilename
-        } else {
-            // TODO if filename is not null, use replaceTag to create newFilename
-        }
-
-        // TODO return a new file with path directory/newFilename;
-        return null;
-    }
+    // **** CREATING FILES **** //
 
     /**
      * Returns a filename based on the given img and tag values
      * @param img IMG value
      * @param tag TAG value
-     * @return filename of the formate IMG_img_TAG_tag.jpg
+     * @return filename of the format IMG_img_TAG_tag.jpg
      */
-    private static String generateFilename(String img, String tag) {
+    private static String createFilename(String img, String tag) {
         //TODO returns a string representing the filename with IMG value img and TAG value tag
         return null;
     }
-    /**
-     * Returns a unique filename based on the timestamp and with the default tag (DEFAULT_TAG)
-     * @return unique filename with the given tag
-     */
-    private static String generateFilename() {
-        String img = null; // TODO set img to the current time (see SimpleDateFormat.format(new Date()))
-        String tag = null; // TODO set tag to DEFAULT_TAG
-        return generateFilename(img,tag);
-    }
 
     /**
-     * Returns a new filename with the same IMG values as orgFilename but with TAg value newTag
-     * @param orgFilename name of file to grab IMG value from
-     * @param newTag TAG value to use in the new filename
-     * @return new filename with the IMG value of orgFilename and the TAG value of newTag
+     * Returns a unique filename based on the timestamp and with the default tag (DEFAULT_TAG)
+     * @return filename of the format IMG_*timestamp*_TAG_DEFAULT_TAG.jpg
      */
-    private static String replaceTag(String orgFilename, String newTag) {
-        String img = null; //TODO set img to the the img value of orgFilename
-        return generateFilename(img,newTag);
+    private static String createFilename() {
+        String img = null; // TODO set img to the current time using DATE_FORMAT (see SimpleDateFormat.format(new Date()))
+        String tag = null; // TODO set tag to DEFAULT_TAG
+        return createFilename(img,tag);
     }
 
     /**
@@ -191,6 +170,62 @@ public class PhotoHelper {
     }
 
     /**
+     * Returns a new filename with the same IMG values as orgFilename but with TAG value newTag
+     * @param orgFilename name of file to grab IMG value from
+     * @param newTag TAG value to use in the new filename
+     * @return new filename with the IMG value of orgFilename and the TAG value of newTag
+     */
+    private static String replaceTag(String orgFilename, String newTag) {
+        String img = null; // TODO get the IMG value of orgFilenam
+        return createFilename(img,newTag);
+    }
+
+    /**
+     * Returns a File who's parent is directory and name is filename with TAG value newTag
+     * if filename is null, a new filename is created
+     * @param directory parent to create the file under
+     * @param filename filename to use the IMG value from
+     * @param newTag TAG value to use, if null, uses DEFAULT_TAG
+     * @return File with save path as directory/filename but with the TAG newTag
+     */
+    private static File createFile(File directory, String filename, String newTag) {
+        String newFilename;
+
+        if(filename == null) {
+            // TODO if filename is null, use createFilename() to create newFilename
+        } else {
+            // TODO if filename is not null, use replaceTag() to create newFilename
+        }
+
+        // TODO return a new file with path directory/newFilename;
+        return null;
+    }
+
+    /**
+     * Create a new directory at parent/directoryName, does nothing if it alreasy exists
+     * @param parent parent to create this directory under
+     * @param directoryName name of new directory
+     * @return path to created directory
+     */
+    private static File createDirectory(File parent, String directoryName) {
+        // TODO make a file with path parent/directoryName
+        // TODO if file does not exist, make it (see File.exists() and File.mkdirs())
+        return null;
+    }
+
+    // **** SEARCHING FILES  **** //
+
+    /**
+     * Retrieves a List of all the bitmap Files that have the given tag
+     * @param tag desired tag to filter by
+     * @return List of Files with given tag
+     */
+    public static List<File> getBitmapFiles(String tag) {
+        BitmapTagFilter filter = new BitmapTagFilter(tag);
+        return new ArrayList<>(Arrays.asList(IMAGE_DIRECTORY.listFiles(filter)));
+    }
+
+    /**
      * Filter that can by applied to a File search to get only Files with the desired tag
      */
     private static class BitmapTagFilter implements FileFilter {
@@ -204,17 +239,5 @@ public class PhotoHelper {
             String filename = file.getName();
             return filename.endsWith(EXT) && mTag.equals(getTAG(filename));
         }
-    }
-
-    /**
-     * Attempt to create a new directory at parent/directoryName, does nothing if it alreasy exists
-     * @param parent parent to create this directory under
-     * @param directoryName name of new directory
-     * @return path to created directory
-     */
-    private static File createDirectory(File parent, String directoryName) {
-        // TODO make a file with path parent/directoryName
-        // TODO if file does not exist, make it (see File.exists() and File.mkdirs())
-        return null;
     }
 }

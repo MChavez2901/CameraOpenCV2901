@@ -13,31 +13,35 @@ import java.util.List;
 
 /**
  * Helper class used to perform various feature detections
+ * You will be replying heavily on openCV class ImgProc
+ * see http://docs.opencv.org/java/org/opencv/imgproc/Imgproc.html
  */
 public class MatFilter {
     private static final String TAG = "MatHelper";
+
     private static int DEPTH = CvType.CV_8U;
 
     static double D_RHO = 1;
     static double D_THETA = Math.PI/180;
 
     static int gaussian_ksize = 5;
+
     static int canny_lowerThreshold = 100;
     static int canny_upperThreshold = 200;
-    static int sobel_ksize = 7;
-    static int laplacian_ksize = 3;
+
     static int hough_threshold = 80;
     static int hough_minLinLength = 30;
     static int hough_maxLineGap = 10;
 
     /**
      * gets the grayscale mat resulting from the given mat
+     * see http://docs.opencv.org/java/org/opencv/imgproc/Imgproc.html#cvtColor%28org.opencv.core.Mat,%20org.opencv.core.Mat,%20int%29
      * @param srcMat a RGB Mat
      * @return grayscale of srcMat
      */
     public static Mat getGrayScale(Mat srcMat) {
         Mat resMat = new Mat();
-        //TODO convert SrcMat to be grayscale (see Imgproc.cvtColor)
+        //TODO convert SrcMat to be grayscale (see Imgproc.cvtColor and Imgproc.COLOR_BGRA2GRAY)
         return resMat;
     }
 
@@ -48,27 +52,26 @@ public class MatFilter {
      */
     public static Mat getRBG(Mat srcMat) {
         Mat resMat = new Mat();
-        //TODO convert SrcMat to be rbg (see Imgproc.cvtColor)
+        //TODO convert SrcMat to be rbg (see Imgproc.cvtColor and Imgproc.COLOR_GRAY2BGRA)
         return resMat;
     }
 
     /**
      * Performs a Gaussian blur
-     * see http://docs.opencv.org/modules/gpu/doc/image_filtering.html?highlight=gaussianblur
+     * see http://docs.opencv.org/java/org/opencv/imgproc/Imgproc.html#GaussianBlur%28org.opencv.core.Mat,%20org.opencv.core.Mat,%20org.opencv.core.Size,%20double%29
      * @param srcMat a grayscale Mat
      * @param ksize blurring kernel size
      * @return GaussianBlur's output
      */
     public static Mat getGaussianBlur(Mat srcMat, int ksize) {
         Mat resMat = new Mat();
-        //TODO perform filter, see Imgproc.GaussianBlur()
+        //TODO perform filter
         return resMat;
     }
 
     /**
      * Performs a Canny edge detection
-     * see http://docs.opencv.org/modules/ocl/doc/feature_detection_and_description.html?highlight=canny
-     * see http://docs.opencv.org/doc/tutorials/imgproc/imgtrans/canny_detector/canny_detector.html?highlight=canny
+     * see http://docs.opencv.org/java/org/opencv/imgproc/Imgproc.html#Canny%28org.opencv.core.Mat,%20org.opencv.core.Mat,%20double,%20double%29
      * @param srcMat a grayscale Mat, it is recommened that it has been blurred to eleminate noise
      * @param lowerThreshold lower gradient cutoff
      * @param upperTheshold upper gradient cutoff
@@ -76,48 +79,45 @@ public class MatFilter {
      */
    public static Mat getCanny(Mat srcMat, int lowerThreshold, int upperTheshold) {
         Mat resMat = new Mat();
-       //TODO perform filter, see Imgproc.Canny()
+       //TODO perform filter
         return resMat;
     }
 
     /**
      * Performs a Sobel image filter
-     * see http://docs.opencv.org/modules/gpu/doc/image_filtering.html?highlight=sobel
-     * see http://docs.opencv.org/master/d2/d2c/tutorial_sobel_derivatives.html#gsc.tab=0
+     * see http://docs.opencv.org/java/org/opencv/imgproc/Imgproc.html#Sobel%28org.opencv.core.Mat,%20org.opencv.core.Mat,%20int,%20int,%20int%29
      * @param srcMat a grayscale Mat, it is recommened that it has been blurred to eleminate noise
      * @param dx derivative order for x, recommend to use 0 or 1
      * @param dy derivative order for y, recommend to use 0 or 1
-     * @param ksize Size of the Sobel kernel. Possible values are 1, 3, 5 or 7.
      * @return Sobel's output
      */
-    public static Mat getSobel(Mat srcMat, int dx, int dy, int ksize) {
+    public static Mat getSobel(Mat srcMat, int dx, int dy) {
         Mat resMat = new Mat();
-        //TODO perform filter, see Imgproc.Sobel()
+        //TODO perform filter
         return resMat;
     }
 
     /**
      * Performs a Laplacian image filter
-     * see http://docs.opencv.org/modules/gpu/doc/image_filtering.html?highlight=sobel#gpu-laplacian
-     * see http://docs.opencv.org/doc/tutorials/imgproc/imgtrans/laplace_operator/laplace_operator.html
+     * see http://docs.opencv.org/java/org/opencv/imgproc/Imgproc.html#Laplacian%28org.opencv.core.Mat,%20org.opencv.core.Mat,%20int%29
      * @param srcMat a grayscale Mat, it is recommened that it has been blurred to eleminate noise
-     * @param ksize Size of the Laplacian kernal. Possible values are 1 or 3.
      * @return Laplacian's output
      */
-    public static Mat getLaplacian(Mat srcMat, int ksize) {
+    public static Mat getLaplacian(Mat srcMat) {
         Mat resMat = new Mat();
-        //TODO perform filter, see Imgproc.Laplacian()
+        //TODO perform filter
         return resMat;
     }
 
     /**
      * Performs a color mask on the given Mat to show only one channel(red,green,or blue) in grayscale
+     * see http://docs.opencv.org/java/org/opencv/core/Core.html#split%28org.opencv.core.Mat,%20java.util.List%29
      * @param srcMat a RBG Mat
      * @param channel channel to mask to (0=red,1=green,2=blue)
      * @return mat of a single color channel taken from srcMat
      */
     public static Mat getChannel(Mat srcMat, int channel) {
-        //TODO split srcMat into its 3 channels, return desired one (see Core.split)
+        //TODO split srcMat into its 3 channels, return desired one
         return null;
     }
 
@@ -138,7 +138,7 @@ public class MatFilter {
 
     /**
      * Performs HoughLinesP to find all lines in srcMat
-     * see http://docs.opencv.org/modules/imgproc/doc/feature_detection.html?highlight=hough#cv2.HoughLinesP
+     * see http://docs.opencv.org/java/org/opencv/imgproc/Imgproc.html#HoughLinesP%28org.opencv.core.Mat,%20org.opencv.core.Mat,%20double,%20double,%20int,%20double,%20double%29
      * @param srcMat a Mat of type CvType.CV_8U (single 8 bit channel) that is a result for a edge detection filter
      * @param threshold minumum points needed to form a line
      * @param minLinLength minimum length of a line
@@ -147,12 +147,13 @@ public class MatFilter {
      */
     private static Mat getHoughLines(Mat srcMat, int threshold, int minLinLength, int maxLineGap) {
         Mat lines = new Mat();
-        // TODO perform HoughLinesP, see Imgproc.HoughLinesP()
+        // TODO perform HoughLinesP
         return lines;
     }
 
     /**
      * Draws lines on srcMat
+     * see http://docs.opencv.org/java/org/opencv/core/Core.html#line%28org.opencv.core.Mat,%20org.opencv.core.Point,%20org.opencv.core.Point,%20org.opencv.core.Scalar%29
      * @param srcMat a Mat of type CvType.CV_8U (single 8 bit channel)
      * @param lines a Mat of lines of the form [x1,y1,x2,y2]
      * @return Mat that is srcMat with the given lines drawn on
@@ -173,13 +174,6 @@ public class MatFilter {
 
     public static Mat getCanny(Mat srcMat) {
         return getCanny(srcMat, canny_lowerThreshold, canny_upperThreshold);
-    }
-    public static Mat getSobel(Mat srcMat, int dx, int dy) {
-        return getSobel(srcMat, dx, dy, sobel_ksize);
-    }
-
-    public static Mat getLaplacian(Mat srcMat) {
-        return getLaplacian(srcMat, laplacian_ksize);
     }
 
     public static Mat getHoughMat(Mat srcMat) {

@@ -18,42 +18,36 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * ViewActivity uses EXTRA_FILE_PATH to open the Mat sotred at that location
- * inorder to allow the use to perform a variety of image processsing on it
+ * ImageDisplayActivity uses EXTRA_FILE_PATH to open the Mat sotred at that location
+ * In order to allow the use to perform a variety of image processsing on it
+ * info on spinners: http://developer.android.com/guide/topics/ui/controls/spinner.html
+ * info on hashmaps: http://beginnersbook.com/2013/12/hashmap-in-java-with-example/
  */
-public class ViewActivity extends Activity implements OnItemSelectedListener {
+public class ImageDisplayActivity extends Activity implements OnItemSelectedListener {
     private static final String TAG = "ViewActivity";
 
     // extra passed with intent so we know which file to open
     public static final String EXTRA_FILE_PATH = "extraFilePath";
 
     // List of tags we are expected to handle (should include all from @array/transforms)
-    private static final String tag_red = "red";
-    private static final String tag_green = "green";
-    private static final String tag_blue = "blue";
-    private static final String tag_gray = "gray";
-    private static final String tag_sobel = "sobel";
-    private static final String tag_sobel_x = "sobel_x";
-    private static final String tag_sobel_y = "sobel_y";
-    private static final String tag_laplacian = "laplacian";
-    private static final String tag_gaussian = "gaussian";
-    private static final String tag_canny = "canny";
-    private static final String tag_hough = "hough";
+    private static final String tag_default = "default", tag_red = "red", tag_green = "green", tag_blue = "blue",
+            tag_gray = "gray", tag_sobel = "sobel", tag_sobel_x = "sobel_x", tag_sobel_y = "sobel_y",
+            tag_laplacian = "laplacian", tag_gaussian = "gaussian", tag_canny = "canny", tag_hough = "hough";
 
-    private Mat mSrcMat; // Unaltered Mat to use as base
     private File mFile; // File to get mSrcMat from
+    private Mat mSrcMat; // Unaltered Mat to use as base
     private Bitmap mBitmap; // Bitmap use hold Mat's in View friendly form
     private ImageView mImage; // View to display mBitmap
-    private Spinner mSpinner; // View to house menu options
+    private Spinner mSpinner; // View of menu options 
     private Map<String,Mat> mMats = new HashMap<>(); // mapping of tags to Mats
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_view);
+        setContentView(R.layout.activity_image_display);
 
         // grab the extra denoting the filepath and use it to create a File
-        //TODO grab filePath from inent Extra, create mFile with it
+        //TODO grab filePath from intent Extra, create mFile with it (see https://androidcookbook.com/Recipe.seam?recipeId=809)
 
         //TODO set mImage to the ImageView in the layout
 
@@ -74,29 +68,8 @@ public class ViewActivity extends Activity implements OnItemSelectedListener {
      */
     protected void setImage(Mat mat) {
         //TODO convert mat into a bitmap (see Utils.matToBitmap)
-        //TODO set mImage to show the bitmap
+        //TODO set mImage to show the bitmap (see ImageView.setImageBitmap())
     }
-
-    /**
-     * Invoked when an item in the spinner has been selected, set the image to the corresponding mat
-     * @param parent the spinner view
-     * @param view the view that was selected
-     * @param position the position of the view in the spinner
-     * @param id the id of the view
-     */
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String tag = (String) ((TextView) view).getText(); // get the text of the view
-        Mat mat = getMat(tag); // get the corresponding mat
-        setImage(mat);  // set the image to show mat
-    }
-
-    /**
-     * Invoked when the selection disappears from the spinner (will not happen)
-     * @param parent the spinner view
-     */
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) { /* do nothing */ }
 
     /**
      * returns the Mat corresponding to the given tag
@@ -140,4 +113,26 @@ public class ViewActivity extends Activity implements OnItemSelectedListener {
         //TODO add key/value pair tag/resMat to mMats
         return resMat;
     }
+
+    /**
+     * Invoked when an item in the spinner has been selected, set the image to the corresponding mat
+     * @param parent the spinner view
+     * @param view the view that was selected
+     * @param position the position of the view in the spinner
+     * @param id the id of the view
+     */
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        String tag = (String) ((TextView) view).getText(); // get the text of the view
+        Mat mat = getMat(tag); // get the corresponding mat
+        setImage(mat);  // set the image to show mat
+    }
+
+    /**
+     * Invoked when the selection disappears from the spinner (will not happen)
+     * @param parent the spinner view
+     */
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) { /* do nothing */ }
+
 }
