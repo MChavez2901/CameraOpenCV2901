@@ -14,10 +14,12 @@ The work can be split up into several independant pieces:
 
 2) CameraActivity - allows user to take images
 
-3) ViewActivity/GalleryActivity - allow the user to view saved images
+3) ImageDisplayActivity - allows the user to view a image and various image processing techniques performed on it
 
-4) MatFilter - perform image processing on images
+4) GalleryActivity - allow the user to view a list of all saved images and open/delete them
 
-5) MainActivity - allow user to start Camera/Gallery Activities 
+5) MatFilter - perform image processing on images
 
-read over the comments in each java class to get an understanding for their purpose
+6) MainActivity - allow user to start Camera/Gallery Activities 
+
+read over the comments in eachclass to get an understanding for their purpose
