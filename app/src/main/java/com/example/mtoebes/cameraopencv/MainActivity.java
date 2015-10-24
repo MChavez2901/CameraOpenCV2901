@@ -4,6 +4,10 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 
+import org.opencv.android.BaseLoaderCallback;
+import org.opencv.android.LoaderCallbackInterface;
+import org.opencv.android.OpenCVLoader;
+
 /**
  * Activity that is started when the app is first created
  * display 2 buttons, one to start the camera, one to open the gallery
@@ -16,6 +20,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_3, this,
+                mLoaderCallback);
     }
 
     /**
@@ -35,5 +41,15 @@ public class MainActivity extends Activity {
     public void openGallery(View view) {
         // TODO start the GalleryActivity
     }
+
+    private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
+        @Override
+        public void onManagerConnected(int status) {
+            if(LoaderCallbackInterface.SUCCESS != status) {
+                super.onManagerConnected(status);
+            }
+        }
+    };
+
 }
 
