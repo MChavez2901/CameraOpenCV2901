@@ -23,6 +23,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         OpenCVLoader.initAsync(OpenCVLoader.OPENCV_VERSION_2_4_3, this,
                 mLoaderCallback);
+        FilteredMat.loadPreferences(this);
     }
 
     /**
