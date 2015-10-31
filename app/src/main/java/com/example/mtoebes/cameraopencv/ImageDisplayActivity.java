@@ -29,17 +29,12 @@ public class ImageDisplayActivity extends Activity implements OnItemSelectedList
     // extra passed with intent so we know which file to open
     public static final String EXTRA_FILE_PATH = "extraFilePath";
 
-    // List of tags we are expected to handle (should include all from @array/transforms)
-    private static final String tag_default = "default", tag_red = "red", tag_green = "green", tag_blue = "blue",
-            tag_gray = "gray", tag_sobel = "sobel", tag_sobel_x = "sobel_x", tag_sobel_y = "sobel_y",
-            tag_laplacian = "laplacian", tag_gaussian = "gaussian", tag_canny = "canny", tag_hough = "hough";
-
-    private File mFile; // File to get mSrcMat from
     private Mat mSrcMat; // Unaltered Mat to use as base
+    private File mFile; // File to get mSrcMat from
     private Bitmap mBitmap; // Bitmap use hold Mat's in View friendly form
     private ImageView mImage; // View to display mBitmap
-    private Spinner mSpinner; // View of menu options
-    private Map<String,Mat> mMats = new HashMap<>(); // mapping of tags to Mats
+    private Spinner mSpinner; // drop-down of filter options
+    private FilteredMat mFilteredMat; // Helper object to perfrom filters on Mats
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,7 +54,24 @@ public class ImageDisplayActivity extends Activity implements OnItemSelectedList
         // get the Mat at mFile, create a bitmap from it, and set it as the display image
         //TODO open mFile and set mSrcMat to the Mat stored there
         //TODO create mBitmap as a Bitmap large enough to hold mSrcMat (use Bitmap.Config.ARGB_8888)
-        setImage(mSrcMat);
+
+        //TODO create mFilteredMat as a new FilteredMat
+        //TODO update mFilteredMat with Mat mSrcMat
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // grabs the name (tag) of the currently selected option, else uses ""
+        View view = mSpinner.getSelectedView();
+        String tag = "";
+        if(view != null) {
+            tag = (String) ((TextView) view).getText();
+        }
+
+        Mat mat = null; //TODO use mFilteredMat to get a result Mat based on tag
+        setImage(mat);  // set the image to show mat
     }
 
     /**
@@ -72,49 +84,6 @@ public class ImageDisplayActivity extends Activity implements OnItemSelectedList
     }
 
     /**
-     * returns the Mat corresponding to the given tag
-     * @param tag tag to use to find desired mat
-     * @return mat corresponding to the tag
-     */
-    public Mat getMat(String tag) {
-        // If we already created the mat, return it
-        //TODO check to see if mMat's contains tag as a key, if so, return the value for that key
-
-        // Else create it
-        Mat resMat;
-        switch(tag) {
-            case tag_hough:
-                resMat = MatFilter.getHoughMat(getMat(tag_canny)); break;
-            case tag_canny:
-                resMat = MatFilter.getCanny(getMat(tag_gaussian)); break;
-            case tag_gaussian:
-                resMat = MatFilter.getGaussianBlur(getMat(tag_gray)); break;
-            case tag_laplacian:
-                resMat = MatFilter.getLaplacian(getMat(tag_gaussian)); break;
-            case tag_sobel:
-                resMat = MatFilter.getSobel(getMat(tag_gaussian),1,1); break;
-            case tag_sobel_x:
-                resMat = MatFilter.getSobel(getMat(tag_gaussian),1,0); break;
-            case tag_sobel_y:
-                resMat = MatFilter.getSobel(getMat(tag_gaussian),0,1); break;
-            case tag_red:
-                resMat = MatFilter.getChannel(mSrcMat, 0); break;
-            case tag_green:
-                resMat = MatFilter.getChannel(mSrcMat, 1); break;
-            case tag_blue:
-                resMat = MatFilter.getChannel(mSrcMat, 2); break;
-            case tag_gray:
-                resMat = MatFilter.getGrayScale(mSrcMat); break;
-            default:
-                resMat = mSrcMat; break;
-        }
-
-        // add the created mat to the map so we remember it next time
-        //TODO add key/value pair tag/resMat to mMats
-        return resMat;
-    }
-
-    /**
      * Invoked when an item in the spinner has been selected, set the image to the corresponding mat
      * @param parent the spinner view
      * @param view the view that was selected
@@ -124,7 +93,7 @@ public class ImageDisplayActivity extends Activity implements OnItemSelectedList
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         String tag = (String) ((TextView) view).getText(); // get the text of the view
-        Mat mat = getMat(tag); // get the corresponding mat
+        Mat mat = null; //TODO use mFilteredMat to get a result Mat based on tag
         setImage(mat);  // set the image to show mat
     }
 
@@ -135,4 +104,7 @@ public class ImageDisplayActivity extends Activity implements OnItemSelectedList
     @Override
     public void onNothingSelected(AdapterView<?> parent) { /* do nothing */ }
 
+    public void openPrefs(View view) {
+        // TODO start the FilterPreferenceActivity
+    }
 }

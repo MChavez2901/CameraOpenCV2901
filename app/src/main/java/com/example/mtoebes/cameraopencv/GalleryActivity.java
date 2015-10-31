@@ -34,7 +34,7 @@ public class GalleryActivity extends ListActivity  {
         setContentView(R.layout.activity_gallery);
 
         // get list of the files we want to display in gallery
-        List<File> data = null; // TODO get files with tag=DEFAULT_TAG to show in Gallery
+        List<File> data = FileHelper.getBitmapFiles();
 
         // create the ArrayAdapter that will populate this view
         mListAdapter = new GalleryListAdapter(data);

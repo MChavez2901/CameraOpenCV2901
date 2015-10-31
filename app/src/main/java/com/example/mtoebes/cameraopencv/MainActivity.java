@@ -1,6 +1,7 @@
 package com.example.mtoebes.cameraopencv;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
@@ -40,6 +41,15 @@ public class MainActivity extends Activity {
      */
     public void openGallery(View view) {
         // TODO start the GalleryActivity
+    }
+
+    /**
+     * onClick event that is called when the button with id "pref_button" is pressed
+     * starts FilterPreferenceActivity
+     * @param view
+     */
+    public void openPrefs(View view) {
+        // TODO start the FilterPreferenceActivity
     }
 
     private BaseLoaderCallback mLoaderCallback = new BaseLoaderCallback(this) {
