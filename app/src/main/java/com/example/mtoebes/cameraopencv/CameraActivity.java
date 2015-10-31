@@ -3,7 +3,6 @@ package com.example.mtoebes.cameraopencv;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.TextView;
@@ -12,7 +11,6 @@ import org.opencv.android.CameraBridgeViewBase;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewFrame;
 import org.opencv.android.CameraBridgeViewBase.CvCameraViewListener2;
 import org.opencv.core.Mat;
-import android.view.View;
 
 /*
  * CameraActivity opens the back camera and displays the view to the screen.
@@ -73,6 +71,7 @@ public class CameraActivity extends Activity implements CvCameraViewListener2, A
     public void takePhoto(View view) {
         //TODO save mRgba to a file
         //TODO start intent for ImageDisplayActivity with extra EXTRA_FILE_PATH set to the saved image's file path
+        // see https://androidcookbook.com/Recipe.seam?recipeId=809
     }
 
     @Override

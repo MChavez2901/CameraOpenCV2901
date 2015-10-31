@@ -14,8 +14,6 @@ import org.opencv.android.Utils;
 import org.opencv.core.Mat;
 
 import java.io.File;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * ImageDisplayActivity uses EXTRA_FILE_PATH to open the Mat stored at that location
@@ -47,7 +45,6 @@ public class ImageDisplayActivity extends Activity implements OnItemSelectedList
         //TODO set mImage to the ImageView in the layout
 
         // set up the spinner to listen for when an item is selected
-        // spinner's items are set from @array/transforms
         //TODO set mSpinner to the Spinner in the layout
         //TODO set mSpinner's setOnItemSelectedListener to this class
 
